@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Gallery - Derpidj{% endblock title %}
+
+{% block navr %}
+<li><a href="delete">Delete</a></li>
+<li><a href="update">Update</a></li>
+{% endblock navr %}
+
+{% block main %}
+<div class="container-fluid">
+{% if working %}
+<h1>Working... Please try again later</h1>
+{% else %}
+{% if images %}
+	<div class="row">
+    {% for i in images %}
+        <div class="col-sm-3">
+        <div class="panel panel-default">
+		<div class="panel-body" style="min-height:215px;">
+		<img src="{{ i.thumb }}" class="image" id="image{{i.id}}">
+        <a href="{{i.id}}" class="btn btn-block btn-primary detailbutton">Details</a>
+        </div>
+        </div>
+		</div>
+	{% endfor %}
+    </div>
+{% else %}
+	<h1>Sorry Nothing</h1>
+{% endif %}
+{% endif %}
+<nav class="navpagi">
+    <ul class="pagination">
+        {% if images.has_previous %}
+            <li>
+            <a href="?page={{ images.previous_page_number }}"><span>&laquo;</span></a>
+            </li>
+        {% endif %}
+
+        {% for i in images.paginator.page_range %}
+            {% if i == images.number %}
+                <li class="active"><a>{{images.number}}</a></li>
+            {% else %}
+                <li><a href="?page={{i}}">{{i}}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if images.has_next %}
+            <li>
+            <a href="?page={{ images.next_page_number }}"><span>&raquo;</span></a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+</div>
+<div id="blackback"></div>
+{% endblock main %}

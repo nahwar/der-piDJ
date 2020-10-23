@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Api Key - Derpidj{% endblock title %}
+{% block main %}
+	<div class="container">
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<div class="col-md-4">
+	<div class="well">
+	<h1>Api Key </h1>
+
+<form action="{% url 'apikey' user_id=request.user.id %}" method="post" class="form-inline">
+{% csrf_token %}
+  <div class="form-group">
+    <input class="form-control" type="text" name="apikey" id="apikey" value="{{user.details.apikey}}">
+  </div>
+  <button type="submit" class="btn btn-primary btn-raised">Set</button>
+</form>
+
+</div>
+</div>
+</div>
+{% endblock main %}
