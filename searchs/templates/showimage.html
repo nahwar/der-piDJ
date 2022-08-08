@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Image {{ image.id }}{% endblock title %}
+{% block main %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+      <div class="well">
+				<img src={{image.thumb}}>
+        <a href="delete" class="btn btn-warning btn-raised" style="margin-top:20px">Delete</a>
+        </div>
+			</div>
+  			<div class="col-md-8">
+  				<div class="well">
+          <h3>ID</h3>
+  				<p>{{image.id}}</p>
+  				<h3>Thumbnail url</h3>
+  				<a href="{{image.thumb}}">{{image.thumb}}</a>
+  				<h3>Image url</h3>
+  				<a href="{{image.url}}">{{image.url|slice:":100"}}</a>
+  				<h3>Image Post url</h3>
+          {% if website == "1" %}
+  				<a href='https://1.com/{{image.urlpost}}'>{{image.urlpost}}</a>
+          {% elif website == "2" %}
+          <a href="http://2.com/index.php?page=post&s=view&id={{image.urlpost}}">{{image.urlpost}}</a>
+          {% elif website == "3" %}
+          <a href="https://3.com/post/show/{{image.urlpost}}">{{image.urlpost}}</a>
+          {% endif %}
+  				<h3>Source url</h3>
+  				<a href="{{image.source}}">{{image.source|slice:":100"}}</a>
+  				<h3>Artist</h3>
+          
+          {% if image.artist == "Unknown" %}
+          
+          <p>Unknown</p>
+          
+          {% elif website == "1" %}
+          
+          <a href='https://1.com/search?utf8=%E2%9C%93&sbq=artist%3A{{image.artist}}'>{{image.artist}}</a>
+          
+          {% elif website == "2" %}
+          
+          <a href="http://2.com/index.php?page=post&s=list&tags={{image.artist}}">{{image.artist}}</a>
+
+          {% elif website == "3" %}
+          
+          <a href="https://3.com/post/index/1/{{image.artist}}">{{image.artist}}</a>
+          
+          {% else %}
+          
+          <a href='https://www.google.com.ar/search?q={{image.artist}}'>{{image.artist}}</a>
+          
+          {% endif %}
+
+          <h3>Tags</h3>
+
+          <p>{{image.tags}}</p>
+          </div>
+  			</div>
+		</div>
+	</div>
+{% endblock main %}

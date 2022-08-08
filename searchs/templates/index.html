@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Index - Derpidj{% endblock title %}
+{% block main %}
+
+
+	<div class="container" id="container">
+
+	<h1>Index</h1>
+		{% for i in searchs %}
+        <a class="btn btn-block btn-primary btn-raised searchname" href="{% url 'show' search_id=i.id user_id=i.owner.id %}">{{i.searchtext}} -- {{i.website}}</a>
+			
+		{% endfor %}
+	</div>
+{% endblock main %}

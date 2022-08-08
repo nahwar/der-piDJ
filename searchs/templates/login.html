@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Login - Derpidj{% endblock title %}
+{% block main %}
+	<div class="container">
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<div class="col-md-4">
+<div class="well">
+<form action="{% url 'login' %}" method="post">
+{% csrf_token %}
+<div class="form-group">
+<label for="username">Username</label>
+<input class="form-control" type="text" name="username" id="username" value="{{ username }}"/>
+</div>
+<div class="form-group">
+<label for="password">Password</label>
+<input class="form-control" type="password" name="password" id="password"/>
+</div>
+<input class="btn btn-primary btn-raised" type="submit" value="Login" />
+</form>
+</div>
+</div>
+</div>
+{% endblock main %}

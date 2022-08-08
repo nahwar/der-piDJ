@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Index - Derpidj{% endblock title %}
+{% block main %}
+
+
+	<div class="container" id="container">
+
+	<h1>KOL Farming Log</h1>
+	<h3>Advs - Meat Farmed - Meat Total - Date</h3>
+		{% for i in kollog %}
+			<h3>{{i.entry}}</h3><br>
+			
+		{% endfor %}
+	</div>
+{% endblock main %}

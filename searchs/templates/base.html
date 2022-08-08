@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% load staticfiles %}
+
+
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href={% static "bootstrap-material-design.min.css" %}>
+<link rel="stylesheet" href={% static "ripples.min.css" %}>
+<script src={% static "material.min.js" %}></script>
+<script src={% static "ripples.min.js" %}></script>
+
+<link rel="stylesheet" href={% static "css.css" %}>
+<script src={% static "js.js" %}></script>
+
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Derpidj{% endblock title %}</title>
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>                        
+		      </button>
+		      <a class="navbar-brand" href="{% url 'index' %}">DerpiDJ</a>
+		    </div>
+		    <div class="collapse navbar-collapse navbar-responsive-collapse" id="myNavbar">
+			<ul class="nav navbar-nav">
+			
+				{% if user.is_authenticated %}
+				<li><a href="{% url 'new' %}"><span class='glyphicon glyphicon-search' aria-hidden='true'></span> New</a></li>
+				{% endif %}
+					
+			{% block nav %}{% endblock nav %}
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+			{% block navr %}{% endblock navr %}
+
+			<li>
+				{% if user.is_authenticated %}
+				<a href="{% url 'apikey' user_id=request.user.id %}">Derpiwebsite ApiKey</a>
+					
+				{% endif %}
+			</li>
+				<li>
+					<a href="{% url 'kollog' %}">KolLog</a>
+				</li>
+				<li>
+					{% if user.is_authenticated %}
+					<a href="{% url 'logout_path' %}"><span class='glyphicon glyphicon-off' aria-hidden='true'></span> Logout</a>
+					{% else %}
+					<a href="{% url 'login' %}">Login</a>
+					{% endif %}
+				</li>
+			</ul>
+			</div>
+		</div>
+	</nav>
+<div style="height:70px;"></div>
+{% block main %}
+	
+{% endblock main %}
+</body>
+</html>
